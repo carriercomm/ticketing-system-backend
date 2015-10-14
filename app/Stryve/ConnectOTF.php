@@ -70,37 +70,32 @@ class ConnectOTF {
 	 * @return void
 	 */
 
-	$options = [
-		'driver'	=> 'pgsql', // or 'mysql'
-		'host' 		=> $value,
-		'port'		=> $value,
-		'database' 	=> $value,
-		'username'	=> $value,
-		'password' 	=> $value,
-		'charset' 	=> $value,
-		'prefix' 	=> $value,
-		'schema'	=> $value
-	];
+	// $options = [
+	// 	'driver'	=> 'pgsql', // or 'mysql'
+	// 	'host' 		=> $value,
+	// 	'port'		=> $value,
+	// 	'database' 	=> $value,
+	// 	'username'	=> $value,
+	// 	'password' 	=> $value,
+	// 	'charset' 	=> $value,
+	// 	'prefix' 	=> $value,
+	// 	'schema'	=> $value
+	// ];
 
 	public function __construct($options = null)
 	{
 		// set the connection driver
 		$this->setConnectionDriver($options);
-
-
-		// get the connection driver (eg. mysql, pgsql, etc.)
-		// $driver = isset($options['driver']) ? $options['driver'] : $this->getDefaultDriver();
-
 		
-		// get default connection options based on provided driver
-		$default = $this->getDefaultOptions($driver);
+		// get default connection options based on the set driver
+		$default = $this->getDefaultOptions();
 
-		// replace default options with the options provided
+		// replace default options with the options passed
 		foreach($default as $item => $value)
 			$default[$item] = isset($options[$item]) ? $options[$item] : $default[$item];
 
-		// set the temporary connection
-		$this->setTemporaryConfig($driver, $default);
+		// // set the temporary connection
+		// $this->setTemporaryConfig($driver, $default);
 
 		//**********
 		//**********
@@ -142,27 +137,6 @@ class ConnectOTF {
 	}
 
 	/**
-	 * Get the default connection driver.
-	 *
-	 * @return string
-	 */
-	public function getDefaultDriver()
-	{
-		return Config::get('database.default');
-	}
-
-	/**
-	 * Get the default connection options.
-	 *
-	 * @param string $driver
-	 * @return array
-	 */
-	public function getDefaultOptions($driver)
-	{
-		return Config::get('database.connection.' . $driver);
-	}
-
-	/**
 	 * Sets the connection driver.
 	 *
 	 * @param array $options
@@ -184,25 +158,13 @@ class ConnectOTF {
 	}
 
 	/**
-	 * Sets the temporary connection driver.
+	 * Gets the connection driver.
 	 *
-	 * @param string $driver
-	 * @return void
+	 * @return array
 	 */
-	public function setTemporaryConfig($driver)
+	public function getDefaultOptions()
 	{
-		$this->temp_config = Config::set('database.connection', $driver);
-	}
-
-	/**
-	 * Sets the temporary connection options.
-	 *
-	 * @param string $driver
-	 * @return void
-	 */
-	public function setTemporaryConfig($driver, $default)
-	{
-		Config::set('database.connection.' . $driver, $default);
+		return Config::get('database.connections' . $this->getConnectionDriver);
 	}
 
 	/**
