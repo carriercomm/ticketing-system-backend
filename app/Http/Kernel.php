@@ -26,7 +26,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        //  Default Middleware
+        // Default Middleware
         'auth'          =>  \App\Http\Middleware\Authenticate::class,
         'auth.basic'    =>  \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest'         =>  \App\Http\Middleware\RedirectIfAuthenticated::class,
@@ -34,5 +34,6 @@ class Kernel extends HttpKernel
         // Custom Authentication
         'auth.agent'    => \App\Http\Middleware\AuthenticateAgent::class,
         'auth.client'   => \App\Http\Middleware\AuthenticateClient::class,
+        'org.exists'    => \App\Http\Middleware\OrganizationExists::class,
     ];
 }

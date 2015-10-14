@@ -1,9 +1,9 @@
 <?php
 
 // Backend UI for Organizations (incl. client portal)
-Route::group(['domain' => '{organization}.stryve.io'], function()
+Route::group(['domain' => '{organization}.stryve.io', 'middleware' => 'org.exists'], function()
 {
-	// AUTH ROUTES
+	// AUTHENTICATION ROUTES
 	Route::group(['prefix' => 'auth', 'as' => 'auth::'], function()
 	{
 		Route::get('agent-login', ['as' => 'agent-login', 'uses' => 'AuthController@getAgentLogin']);
