@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class AuthenticateClient
+class OrganizationIsActive
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,8 @@ class AuthenticateClient
      */
     public function handle($request, Closure $next)
     {
-        // Confirm that the client is still logged in
+        // API call to check that the organization's
+        // subscription is still active.
 
         return $next($request);
     }

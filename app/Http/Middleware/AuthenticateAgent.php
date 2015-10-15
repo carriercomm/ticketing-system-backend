@@ -15,6 +15,8 @@ class AuthenticateAgent
      */
     public function handle($request, Closure $next)
     {
+        // API call to confirm that the agent is still logged in
+        
         return $next($request);
     }
 }

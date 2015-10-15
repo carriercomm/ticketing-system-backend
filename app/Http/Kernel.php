@@ -32,8 +32,8 @@ class Kernel extends HttpKernel
         'guest'         =>  \App\Http\Middleware\RedirectIfAuthenticated::class,
 
         // Custom Authentication
-        'auth.agent'    => \App\Http\Middleware\AuthenticateAgent::class,
-        'auth.client'   => \App\Http\Middleware\AuthenticateClient::class,
-        'org.exists'    => \App\Http\Middleware\OrganizationExists::class,
+        'auth.agent'        => \App\Http\Middleware\AuthenticateAgent::class,
+        'auth.client'       => \App\Http\Middleware\AuthenticateClient::class,
+        'org.is.active'     => \App\Http\Middleware\OrganizationIsActive::class,
     ];
 }
